@@ -61,6 +61,11 @@ html {
   box-shadow: 1px 1px 2px var(--main-color-dark-shadow),
     -1px -1px 2px var(--main-color-light-shadow);
 }
+.neumorphism-0 {
+  @apply bg-primary;
+  box-shadow: 0px 0px 0px var(--main-color-dark-shadow),
+    -0px -0px 0px var(--main-color-light-shadow);
+}
 .neumorphism-inset-5 {
   @apply bg-primary;
   box-shadow: inset 5px 5px 10px var(--main-color-dark-shadow),
@@ -92,24 +97,31 @@ button.neumorphism-5:active:not(:disabled) {
 .neumorphism-input-text-wrapper input[type="text"] {
   background: none;
 }
-.neumorphism-input-text-wrapper:hover:not(.neumorphism-inset-2):not(
-    .div-disabled
-  ) {
+.neumorphism-input-text-wrapper.neumorphism-inset-5:hover:not(
+  .div-disabled
+) {
   @apply neumorphism-inset-4;
 }
 
-input[type="checkbox"]:hover:not(:checked):not(:disabled) ~ .neumorphism-checkbox-dummy,
-input[type="checkbox"]:not(:checked):not(:disabled) ~ .neumorphism-checkbox-dummy:hover,
-input[type="checkbox"]:not(:checked):not(:disabled) ~ .neumorphism-checkbox-dummy:focus {
-  @apply neumorphism-inset-2;
+.neumorphism-checkbox-dummy-checked-animation {
+  animation-name: check-pop-up-from-ripple;
+  animation-duration: 0.4s;
+  animation-fill-mode: none;
+  animation-timing-function: ease-out;
+  @apply neumorphism-4;
 }
-input[type="checkbox"]:checked:hover:not(:disabled) ~ .neumorphism-checkbox-dummy,
-input[type="checkbox"]:checked:not(:disabled) ~ .neumorphism-checkbox-dummy:hover,
-input[type="checkbox"]:checked:not(:disabled) ~ .neumorphism-checkbox-dummy:focus {
-  @apply neumorphism-2;
+@keyframes check-pop-up-from-ripple {
+  from {
+    @apply neumorphism-0;
+  }
+  60% {
+    @apply neumorphism-0;
+  }
+  to {
+    @apply neumorphism-4;
+  }
 }
-
-.neumorphism-checkbox-ripple-active {
+.neumorphism-checkbox-ripple-animation {
   animation-name: checkbox-ripple;
   animation-duration: 0.4s;
   animation-fill-mode: forwards;
@@ -118,10 +130,6 @@ input[type="checkbox"]:checked:not(:disabled) ~ .neumorphism-checkbox-dummy:focu
 @keyframes checkbox-ripple {
   0% {
     opacity: 0.4;
-    /* left: 50%;
-    transform: translateX(-50);
-    top: 50%;
-    transform: translateY(-50%); */
   }
   50% {
     opacity: 1;
@@ -131,6 +139,16 @@ input[type="checkbox"]:checked:not(:disabled) ~ .neumorphism-checkbox-dummy:focu
     transform: scale(200%);
     visibility: hidden;
   }
+}
+input[type="checkbox"]:hover:not(:checked):not(:disabled) ~ .neumorphism-checkbox-dummy,
+input[type="checkbox"]:not(:checked):not(:disabled) ~ .neumorphism-checkbox-dummy:hover,
+input[type="checkbox"]:not(:checked):not(:disabled) ~ .neumorphism-checkbox-dummy:focus {
+  @apply neumorphism-inset-2;
+}
+input[type="checkbox"]:checked:hover:not(:disabled) ~ .neumorphism-checkbox-dummy,
+input[type="checkbox"]:checked:not(:disabled) ~ .neumorphism-checkbox-dummy:hover,
+input[type="checkbox"]:checked:not(:disabled) ~ .neumorphism-checkbox-dummy:focus {
+  @apply neumorphism-2;
 }
 
 .neumorphism-tooltip .neumorphism-tooltip-text {

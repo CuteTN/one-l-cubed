@@ -53,11 +53,10 @@ export function CheckBox({
 
       <div
         className={combineClassNames(
-          "neumorphism-checkbox-ripple blur-[1px] absolute inline-flex rounded-full neumorphism-2",
-          [checked, "neumorphism-checkbox-ripple-active", "hidden"],
+          "neumorphism-checkbox-ripple control blur-[1px] absolute inline-flex rounded-full neumorphism-2 text-center justify-center",
+          [checked, "neumorphism-checkbox-ripple-animation", "hidden"],
         )}
-        style={{ width: boxSize, height: boxSize }}
-      />
+        style={{ width: boxSize, height: boxSize }}></div>
 
       <div
         className={combineClassNames(
@@ -70,7 +69,11 @@ export function CheckBox({
           "text-gray-600",
           "select-none",
           [disabled, "div-disabled"],
-          [checked, "neumorphism-4", "neumorphism-inset-3 text-opacity-30"],
+          [
+            checked,
+            "neumorphism-checkbox-dummy-checked-animation",
+            "neumorphism-inset-3 text-opacity-30",
+          ],
         )}
         tabIndex={0}
         style={{

@@ -54,7 +54,7 @@ export function CommonComponentsDemo() {
           content="tooltip thingy"
           circleHitBox
           position="top">
-          <div className="w-96 h-96 rounded-full bg-blue-600"></div>
+          <div className="w-52 h-52 rounded-full neumorphism-5"></div>
         </Tooltip>
       </div>
       {Array(10)
