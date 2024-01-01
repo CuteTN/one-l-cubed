@@ -66,13 +66,13 @@ export function CheckBox({
           "rounded-md",
           "text-center",
           "justify-center",
-          "text-gray-600",
           "select-none",
+          "text-primary",
           [disabled, "div-disabled"],
           [
             checked,
             "neumorphism-checkbox-dummy-checked-animation",
-            "neumorphism-inset-3 text-opacity-30",
+            "neumorphism-inset-3 !text-opacity-30",
           ],
         )}
         tabIndex={0}

@@ -1,0 +1,232 @@
+$neumorphism-themes: (
+  light: (
+    main: #ffdfe7,
+    dark-shadow: #ccb2b9,
+    light-shadow: #ffffff,
+    text: #000000,
+    disabled-text: #9ca3af,
+  ),
+  dark: (
+    main: #42383d,
+    dark-shadow: #241f22,
+    light-shadow: #605158,
+    text: #ffdfe7,
+    disabled-text: #A38F95,
+  ),
+);
+
+$max-neumorphism-level: 10;
+
+@mixin neumorphism($level, $theme) {
+  box-shadow: #{$level * 1px} #{$level * 1px} #{$level * 2px} map-get($theme, dark-shadow),
+    -#{$level * 1px} -#{$level * 1px} #{$level * 2px} map-get($theme, light-shadow);
+}
+@mixin inset-neumorphism($level, $theme) {
+  box-shadow: inset #{$level * 1px} #{$level * 1px} #{$level * 2px} map-get($theme, dark-shadow),
+    inset -#{$level * 1px} -#{$level * 1px} #{$level * 2px} map-get($theme, light-shadow);
+}
+
+@mixin theme-styles($theme-name) {
+  $theme: map-get($neumorphism-themes, $theme-name);
+  $main-color: map-get($theme, main);
+  $dark-shadow: map-get($theme, dark-shadow);
+  $light-shadow: map-get($theme, light-shadow);
+  $text-color: map-get($theme, text);
+  $disabled-text-color: map-get($theme, disabled-text);
+
+  body {
+    background-color: $main-color;
+    color: $text-color;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+
+  .bg-primary {
+    background-color: $main-color;
+  }
+  .text-primary {
+    color: $text-color;
+  }
+  .text-disabled {
+    color: $disabled-text-color;
+  }
+
+  .control {
+    outline: none;
+  }
+  .control:disabled,
+  .control.div-disabled {
+    @extend .text-disabled;
+    filter: brightness(0.97);
+  }
+
+  @for $level from 0 through $max-neumorphism-level {
+    .neumorphism-#{$level} {
+      @extend .bg-primary;
+      @include neumorphism($level, $theme);
+    }
+
+    .neumorphism-inset-#{$level} {
+      @extend .bg-primary;
+      @include inset-neumorphism($level, $theme);
+    }
+  }
+
+  /*#region Button*/
+  button.neumorphism-5:hover:not(:active):not(:disabled) {
+    @extend .neumorphism-4;
+  }
+  button.neumorphism-5:active:not(:disabled) {
+    @extend .neumorphism-2;
+  }
+  /*#endregion*/
+
+  /*#region TextBox*/
+  .neumorphism-input-text-wrapper input[type="text"] {
+    background: none;
+  }
+  .neumorphism-input-text-wrapper.neumorphism-inset-5:hover:not(.div-disabled) {
+    @extend .neumorphism-inset-4;
+  }
+  /*#endregion*/
+
+  /*#region CheckBox*/
+  .neumorphism-checkbox-dummy-checked-animation {
+    animation-name: check-pop-up-from-ripple-#{$theme-name};
+    animation-duration: 0.4s;
+    animation-fill-mode: none;
+    animation-timing-function: ease-out;
+    @include neumorphism(4, $theme);
+  }
+  @keyframes check-pop-up-from-ripple-#{$theme-name} {
+    from {
+      @include neumorphism(0, $theme);
+    }
+    60% {
+      @include neumorphism(0, $theme);
+    }
+    to {
+      @include neumorphism(4, $theme);
+    }
+  }
+  .neumorphism-checkbox-ripple-animation {
+    animation-name: checkbox-ripple-#{$theme-name};
+    animation-duration: 0.25s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+  }
+  @keyframes checkbox-ripple-#{$theme-name} {
+    0% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(200%);
+      visibility: hidden;
+    }
+  }
+  input[type="checkbox"]:hover:not(:checked):not(:disabled)
+    ~ .neumorphism-checkbox-dummy,
+  input[type="checkbox"]:not(:checked):not(:disabled)
+    ~ .neumorphism-checkbox-dummy:hover,
+  input[type="checkbox"]:not(:checked):not(:disabled)
+    ~ .neumorphism-checkbox-dummy:focus {
+    @include inset-neumorphism(2, $theme);
+  }
+  input[type="checkbox"]:checked:hover:not(:disabled)
+    ~ .neumorphism-checkbox-dummy,
+  input[type="checkbox"]:checked:not(:disabled)
+    ~ .neumorphism-checkbox-dummy:hover,
+  input[type="checkbox"]:checked:not(:disabled)
+    ~ .neumorphism-checkbox-dummy:focus {
+    @include neumorphism(2, $theme);
+  }
+  /*#endregion*/
+
+  /*#region Tooltip*/
+  .neumorphism-tooltip .neumorphism-tooltip-text {
+    width: max-content;
+  }
+  .neumorphism-tooltip-text.tooltip-top {
+    margin-bottom: 0.5rem;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .neumorphism-tooltip-text.tooltip-bottom {
+    margin-top: 0.5rem;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .neumorphism-tooltip-text.tooltip-left {
+    margin-right: 0.5rem;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .neumorphism-tooltip-text.tooltip-right {
+    margin-left: 0.5rem;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .neumorphism-tooltip:hover .neumorphism-tooltip-text {
+    animation-name: show-tooltip-#{$theme-name};
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+  .neumorphism-tooltip:not(:hover) .neumorphism-tooltip-text {
+    animation-name: hide-tooltip-#{$theme-name};
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes show-tooltip-#{$theme-name} {
+    from {
+      opacity: 0;
+      visibility: visible;
+      @include neumorphism(1, $theme);
+    }
+    20% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    100% {
+      opacity: 1;
+      filter: brightness(1.05);
+      @include neumorphism(8, $theme);
+    }
+  }
+  @keyframes hide-tooltip-#{$theme-name} {
+    from {
+      @include neumorphism(10, $theme);
+      opacity: 1;
+      filter: brightness(1.05);
+    }
+    50% {
+      @include neumorphism(1, $theme);
+      opacity: 0.8;
+      filter: brightness(1);
+    }
+    to {
+      @include neumorphism(1, $theme);
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  /*#endregion*/
+}
+
+:not(.dark) {
+  @include theme-styles(light);
+}
+.dark {
+  @include theme-styles(dark);
+}

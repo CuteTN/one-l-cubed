@@ -5,6 +5,7 @@ import { CheckBox } from "../common/CheckBox.component";
 import { Icon } from "../common/Icon.component";
 import { TextBox } from "../common/TextBox.component";
 import { Tooltip } from "../common/Tooltip.component";
+import { Box } from "../common/Frame.component";
 
 export function CommonComponentsDemo() {
   const [cbxChecked, setCbxChecked] = React.useState(false);
@@ -12,7 +13,7 @@ export function CommonComponentsDemo() {
   return (
     <div>
       <AppBar>
-        <div className="flex h-12 text-center justify-center items-center w-full">
+        <div className="flex h-12 text-center justify-center items-center w-full wtf">
           Smoke weed everyday
         </div>
       </AppBar>
@@ -54,10 +55,12 @@ export function CommonComponentsDemo() {
           content="tooltip thingy"
           circleHitBox
           position="top">
-          <div className="w-52 h-52 rounded-full neumorphism-5"></div>
+            <Box className="p-2 rounded-md">
+            <Box className="w-80 h-20 rounded-md" concave></Box>
+            </Box>
         </Tooltip>
       </div>
-      {Array(10)
+      {Array(5)
         .fill(0)
         .map((_, i) => {
           return (
