@@ -1,12 +1,15 @@
-import React from 'react';
-import { CommonComponentsDemo } from './components/demo/CommonComponentsDemo.component';
+import { CommonComponentsDemo } from "./components/demo/CommonComponentsDemo.component";
+import { ThemesProvider } from "./contexts/themes-provider/themes.provider";
 
 function App() {
   return (
     <div className="App">
-    <CommonComponentsDemo />
+      <ThemesProvider>
+        <CommonComponentsDemo />
+      </ThemesProvider>
     </div>
   );
 }
 
 export default App;
+
