@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar } from "../common/AppBar.component";
+import { NavBar } from "../common/AppBar.component";
 import { Button } from "../common/Button.component";
 import { CheckBox } from "../common/CheckBox.component";
 import { Icon } from "../common/Icon.component";
@@ -12,11 +12,11 @@ export function CommonComponentsDemo() {
 
   return (
     <div>
-      <AppBar>
+      <NavBar>
         <div className="flex h-12 text-center justify-center items-center w-full wtf">
           Smoke weed everyday
         </div>
-      </AppBar>
+      </NavBar>
       <div className="m-7">
         <Tooltip
           content="tooltip thingy how about a long freaking tooltip"

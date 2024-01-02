@@ -1,5 +1,5 @@
 import React from "react";
-import MaterialIcon from "material-icons-react";
+// import MaterialIcon from "material-icons-react";
 import { convertUppercaseToSnakeCase } from "../../common/utils/strings.utils";
 
 export type IconProps = {
@@ -12,6 +12,7 @@ export type IconProps = {
   color?: string;
 };
 
+// TODO: Rework on icons
 export function Icon({
   className = "",
   iconName,
@@ -30,11 +31,11 @@ export function Icon({
         maxWidth: size,
       }}>
       <div className="inline-block mt-1">
-        <MaterialIcon
+        {/* <MaterialIcon
           icon={adjustedIconName}
           size={size}
           color={color}
-        />
+        /> */}
       </div>
     </div>
   );
