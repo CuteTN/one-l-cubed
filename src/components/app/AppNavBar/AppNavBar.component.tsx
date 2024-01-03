@@ -39,6 +39,7 @@ export function AppNavBar() {
               className="-mt-3 -ml-3 h-[90%]"
               src={themeData.logo}
               alt="One L Cubed logo"
+              draggable={false}
             />
           </Box>
 
@@ -46,6 +47,7 @@ export function AppNavBar() {
             className="transition-opacity duration-500 delay-0 ease-in-out h-full opacity-100 sm:opacity-0"
             src={themeData.logo}
             alt="One L Cubed logo"
+            draggable={false}
           />
         </div>
         <div className="flex flex-grow"></div>

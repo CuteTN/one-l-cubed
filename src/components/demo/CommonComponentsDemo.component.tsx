@@ -6,25 +6,28 @@ import { Icon } from "../common/Icon.component";
 import { TextBox } from "../common/TextBox.component";
 import { Tooltip } from "../common/Tooltip.component";
 import { Box } from "../common/Frame.component";
+import { DropDown } from "components/common/DropDown.component";
 
 export function CommonComponentsDemo() {
   const [cbxChecked, setCbxChecked] = React.useState(false);
 
   return (
-    <div>
-      <NavBar>
-        <div className="flex h-12 text-center justify-center items-center w-full wtf">
-          Smoke weed everyday
-        </div>
-      </NavBar>
+    <Box className="m-20 rounded-lg pt-3">
+      <div className="m-7">
+        <DropDown></DropDown>
+      </div>
       <div className="m-7">
         <Tooltip
           content="tooltip thingy how about a long freaking tooltip"
           position="right">
-          {/* <Tooltip content="tooltip thingy" > */}
           <TextBox
             placeholder="Some placeholder"
-            leftComponent={<Icon iconName="search" />}
+            leftComponent={
+              <Icon
+                iconName="search"
+                className="w-5 h-5"
+              />
+            }
           />
         </Tooltip>
       </div>
@@ -55,9 +58,11 @@ export function CommonComponentsDemo() {
           content="tooltip thingy"
           circleHitBox
           position="top">
-            <Box className="p-2 rounded-md">
-            <Box className="w-80 h-20 rounded-md" concave></Box>
-            </Box>
+          <Box className="p-2 rounded-md">
+            <Box
+              className="w-80 h-20 rounded-md"
+              concave></Box>
+          </Box>
         </Tooltip>
       </div>
       {Array(5)
@@ -70,12 +75,12 @@ export function CommonComponentsDemo() {
               disabled={i % 2 === 0}>
               <Icon
                 iconName="dark"
-                className="mr-2"
+                className="w-5 h-5 mr-3"
               />
               Let's go
             </Button>
           );
         })}
-    </div>
+    </Box>
   );
 }

@@ -5,13 +5,17 @@ $neumorphism-themes: (
     light-shadow: #ffffff,
     text: #000000,
     disabled-text: #9ca3af,
+    selection: #a347ff,
+    selection-text: #ffffff,
   ),
   dark: (
     main: #42383d,
     dark-shadow: #241f22,
     light-shadow: #605158,
     text: #ffdfe7,
-    disabled-text: #A38F95,
+    disabled-text: #a38f95,
+    selection: #e493ff,
+    selection-text: #000000,
   ),
 );
 
@@ -33,9 +37,10 @@ $max-neumorphism-level: 10;
   $light-shadow: map-get($theme, light-shadow);
   $text-color: map-get($theme, text);
   $disabled-text-color: map-get($theme, disabled-text);
+  $selection-color: map-get($theme, selection);
+  $selection-text-color: map-get($theme, selection-text);
 
   body {
-    @apply transition-colors duration-100;
     background-color: $main-color;
     color: $text-color;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
@@ -53,6 +58,14 @@ $max-neumorphism-level: 10;
   }
   .stroke-primary {
     stroke: $text-color;
+  }
+  ::selection {
+    background-color: $selection-color;
+    color: $selection-text-color;
+  }
+  ::-moz-selection {
+    background-color: $selection-color;
+    color: $selection-text-color;
   }
 
   .control {
@@ -77,6 +90,9 @@ $max-neumorphism-level: 10;
   }
 
   /*#region Button*/
+  button {
+    filter: contrast(1.05);
+  }
   button.neumorphism-6:hover:not(:active):not(:disabled) {
     @extend .neumorphism-3;
   }
@@ -86,6 +102,11 @@ $max-neumorphism-level: 10;
   /*#endregion*/
 
   /*#region TextBox*/
+  ::placeholder {
+    color: $text-color;
+    opacity: 0.5;
+  }
+
   .neumorphism-input-text-wrapper input[type="text"] {
     background: none;
   }

@@ -7,6 +7,7 @@ function App() {
     <div className="App">
       <ThemesProvider>
         <AppNavBar />
+        <CommonComponentsDemo />
       </ThemesProvider>
     </div>
   );

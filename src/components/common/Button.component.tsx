@@ -17,6 +17,7 @@ export function Button({
     <button
       className={`control min-h-[3rem] neumorphism-6 p-3 rounded-lg flex align-middle justify-center ${className}`}
       disabled={disabled}
+      aria-disabled={disabled}
       onClick={onClick}>
       {children}
     </button>

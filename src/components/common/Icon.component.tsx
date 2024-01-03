@@ -7,7 +7,6 @@ export type IconProps = {
   className?: string;
   iconName: keyof typeof allIcons;
   size?: number;
-  color?: string;
 };
 
 export function Icon({ className = "", iconName, size }: IconProps) {

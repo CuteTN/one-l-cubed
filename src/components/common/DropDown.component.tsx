@@ -4,23 +4,23 @@ import {
   InputContainerProps,
 } from "./InputContainer.component";
 
-export type TextBoxProps = {
+export type DropDownProps = {
   className?: string;
   placeholder?: string;
   leftComponent?: React.ReactNode;
   disabled?: boolean;
 };
 
-export function TextBox({
+export function DropDown({
   className = "",
   placeholder = "",
   leftComponent,
   disabled,
-}: TextBoxProps) {
+}: DropDownProps) {
   const inputProps = React.useMemo<InputContainerProps["inputProps"]>(
     () => ({
       type: "text",
-      role: "textbox",
+      role: "listbox",
       placeholder,
       disabled,
     }),
