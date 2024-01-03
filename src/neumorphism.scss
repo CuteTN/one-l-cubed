@@ -18,12 +18,12 @@ $neumorphism-themes: (
 $max-neumorphism-level: 10;
 
 @mixin neumorphism($level, $theme) {
-  box-shadow: #{$level * 1px} #{$level * 1px} #{$level * 2px} map-get($theme, dark-shadow),
-    -#{$level * 1px} -#{$level * 1px} #{$level * 2px} map-get($theme, light-shadow);
+  box-shadow: #{$level * 1px} #{$level * 1px} #{$level * 1.8px} map-get($theme, dark-shadow),
+    -#{$level * 1px} -#{$level * 1px} #{$level * 1.8px} map-get($theme, light-shadow);
 }
 @mixin inset-neumorphism($level, $theme) {
-  box-shadow: inset #{$level * 1px} #{$level * 1px} #{$level * 2px} map-get($theme, dark-shadow),
-    inset -#{$level * 1px} -#{$level * 1px} #{$level * 2px} map-get($theme, light-shadow);
+  box-shadow: inset #{$level * 1px} #{$level * 1px} #{$level * 1.8px} map-get($theme, dark-shadow),
+    inset -#{$level * 1px} -#{$level * 1px} #{$level * 1.8px} map-get($theme, light-shadow);
 }
 
 @mixin theme-styles($theme-name) {
@@ -35,6 +35,7 @@ $max-neumorphism-level: 10;
   $disabled-text-color: map-get($theme, disabled-text);
 
   body {
+    @apply transition-colors duration-100;
     background-color: $main-color;
     color: $text-color;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
@@ -49,6 +50,9 @@ $max-neumorphism-level: 10;
   }
   .text-disabled {
     color: $disabled-text-color;
+  }
+  .stroke-primary {
+    stroke: $text-color;
   }
 
   .control {
@@ -73,10 +77,10 @@ $max-neumorphism-level: 10;
   }
 
   /*#region Button*/
-  button.neumorphism-5:hover:not(:active):not(:disabled) {
-    @extend .neumorphism-4;
+  button.neumorphism-6:hover:not(:active):not(:disabled) {
+    @extend .neumorphism-3;
   }
-  button.neumorphism-5:active:not(:disabled) {
+  button.neumorphism-6:active:not(:disabled) {
     @extend .neumorphism-2;
   }
   /*#endregion*/

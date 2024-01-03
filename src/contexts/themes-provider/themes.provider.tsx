@@ -8,7 +8,7 @@ export enum EThemes {
 
 type TThemesContextValue = {
   currentTheme: EThemes;
-  setTheme: (theme: EThemes) => void;
+  setTheme: React.Dispatch<React.SetStateAction<EThemes>>;
 };
 
 const themesContext = React.createContext<TThemesContextValue>(null as any);

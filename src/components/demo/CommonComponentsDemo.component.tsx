@@ -69,7 +69,7 @@ export function CommonComponentsDemo() {
               className="m-7"
               disabled={i % 2 === 0}>
               <Icon
-                iconName="Album"
+                iconName="dark"
                 className="mr-2"
               />
               Let's go

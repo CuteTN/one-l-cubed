@@ -14,6 +14,9 @@ module.exports = {
         cubeGreen: "#77dd77",
         cubeGray: "#d0c9c9",
       },
+      transitionProperty: {
+        size: "width, height"
+      }
     },
   },
   plugins: [],
