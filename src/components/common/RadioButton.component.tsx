@@ -1,6 +1,7 @@
+import { combineClassNames } from "common/utils/className";
 import { CommonCheckable } from "./CommonCheckable.component";
 
-export type CheckBoxProps = {
+export type RadioButtonProps = {
   checked?: boolean;
   className?: string;
   label?: string;
@@ -9,24 +10,24 @@ export type CheckBoxProps = {
   onClick?: (toggledChecked: boolean) => any;
 };
 
-export function CheckBox({
+export function RadioButton({
   checked = false,
   className = "",
   label = "",
   disabled = false,
   boxSize = 24,
   onClick,
-}: CheckBoxProps) {
+}: RadioButtonProps) {
   return (
     <CommonCheckable
       className={className}
-      type="checkbox"
+      type="radio"
       boxSize={boxSize}
       checked={checked}
       onClick={onClick}
       disabled={disabled}
       label={label}
-      checker="✔"
+      checker={checked? "⬤" : "⭘"}
     />
   );
 }

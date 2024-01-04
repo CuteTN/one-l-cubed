@@ -21,6 +21,47 @@ $neumorphism-themes: (
 
 $max-neumorphism-level: 10;
 
+@keyframes fade-in-animation {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  1% {
+    display: inline;
+  }
+  100% {
+    display: inline;
+    opacity: 1;
+  }
+}
+@keyframes fade-out-animation {
+  0% {
+    display: inline;
+    opacity: 1;
+  }
+  99% {
+    display: inline;
+  }
+  100% {
+    display: none;
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation-name: fade-in-animation;
+  animation-duration: 0.08s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.fade-out {
+  animation-name: fade-out-animation;
+  animation-duration: 0.08s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
 @mixin neumorphism($level, $theme) {
   box-shadow: #{$level * 1px} #{$level * 1px} #{$level * 1.8px} map-get($theme, dark-shadow),
     -#{$level * 1px} -#{$level * 1px} #{$level * 1.8px} map-get($theme, light-shadow);
@@ -66,6 +107,31 @@ $max-neumorphism-level: 10;
   ::-moz-selection {
     background-color: $selection-color;
     color: $selection-text-color;
+  }
+
+  ::-webkit-scrollbar {
+    width: 1rem;
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-track {
+    @include inset-neumorphism(5, $theme);
+    border-radius: 0.5rem;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar:disabled {
+    display: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    @include neumorphism(4, $theme);
+    border-radius: 0.5rem;
+    background-color: lighten($main-color, 2%);
+    border: darken($main-color, 1%) solid 3px;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+  ::-webkit-scrollbar-corner {
+    @include neumorphism(2, $theme);
   }
 
   .control {
@@ -115,8 +181,8 @@ $max-neumorphism-level: 10;
   }
   /*#endregion*/
 
-  /*#region CheckBox*/
-  .neumorphism-checkbox-dummy-checked-animation {
+  /*#region Checkable CheckBox & Radio*/
+  .neumorphism-checkable-dummy-checked-animation {
     animation-name: check-pop-up-from-ripple-#{$theme-name};
     animation-duration: 0.4s;
     animation-fill-mode: none;
@@ -134,13 +200,13 @@ $max-neumorphism-level: 10;
       @include neumorphism(4, $theme);
     }
   }
-  .neumorphism-checkbox-ripple-animation {
-    animation-name: checkbox-ripple-#{$theme-name};
+  .neumorphism-checkable-ripple-animation {
+    animation-name: checkable-ripple-#{$theme-name};
     animation-duration: 0.25s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
   }
-  @keyframes checkbox-ripple-#{$theme-name} {
+  @keyframes checkable-ripple-#{$theme-name} {
     0% {
       opacity: 0.4;
     }
@@ -153,20 +219,14 @@ $max-neumorphism-level: 10;
       visibility: hidden;
     }
   }
-  input[type="checkbox"]:hover:not(:checked):not(:disabled)
-    ~ .neumorphism-checkbox-dummy,
-  input[type="checkbox"]:not(:checked):not(:disabled)
-    ~ .neumorphism-checkbox-dummy:hover,
-  input[type="checkbox"]:not(:checked):not(:disabled)
-    ~ .neumorphism-checkbox-dummy:focus {
+  input:hover:not(:checked):not(:disabled) ~ .neumorphism-checkable-dummy,
+  input:not(:checked):not(:disabled) ~ .neumorphism-checkable-dummy:hover,
+  input:not(:checked):not(:disabled) ~ .neumorphism-checkable-dummy:focus {
     @include inset-neumorphism(2, $theme);
   }
-  input[type="checkbox"]:checked:hover:not(:disabled)
-    ~ .neumorphism-checkbox-dummy,
-  input[type="checkbox"]:checked:not(:disabled)
-    ~ .neumorphism-checkbox-dummy:hover,
-  input[type="checkbox"]:checked:not(:disabled)
-    ~ .neumorphism-checkbox-dummy:focus {
+  input:checked:hover:not(:disabled) ~ .neumorphism-checkable-dummy,
+  input:checked:not(:disabled) ~ .neumorphism-checkable-dummy:hover,
+  input:checked:not(:disabled) ~ .neumorphism-checkable-dummy:focus {
     @include neumorphism(2, $theme);
   }
   /*#endregion*/
@@ -255,3 +315,4 @@ $max-neumorphism-level: 10;
 .dark {
   @include theme-styles(dark);
 }
+

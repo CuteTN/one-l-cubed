@@ -1,5 +1,4 @@
 import React from "react";
-import { NavBar } from "../common/AppBar.component";
 import { Button } from "../common/Button.component";
 import { CheckBox } from "../common/CheckBox.component";
 import { Icon } from "../common/Icon.component";
@@ -7,12 +6,89 @@ import { TextBox } from "../common/TextBox.component";
 import { Tooltip } from "../common/Tooltip.component";
 import { Box } from "../common/Frame.component";
 import { DropDown } from "components/common/DropDown.component";
+import { Menu } from "components/common/Menu.component";
+import { RadioButton } from "components/common/RadioButton.component";
 
 export function CommonComponentsDemo() {
+  const menuCheckboxButtonRef = React.useRef<HTMLButtonElement>(null);
+  const menuRadioButtonRef = React.useRef<HTMLButtonElement>(null);
   const [cbxChecked, setCbxChecked] = React.useState(false);
+  const [isMenuCheckboxShown, setIsMenuCheckboxShown] = React.useState(false);
+  const [isMenuRadioShown, setIsMenuRadioShown] = React.useState(false);
+  const [selectedOptions, setSelectedOptions] = React.useState<string[]>([
+    "id-1",
+  ]);
+  const [menuOptions, setMenuOptions] = React.useState<
+    { id: string; name: string }[]
+  >([
+    { id: "id-1", name: "One" },
+    { id: "id-2", name: "Two" },
+    { id: "id-3", name: "Three" },
+    { id: "id-4", name: "Four" },
+    { id: "id-5", name: "Five" },
+    { id: "id-6", name: "Six" },
+    { id: "id-7", name: "Seven" },
+    { id: "id-8", name: "Eight" },
+    { id: "id-9", name: "Nine" },
+  ]);
+  const getKeyFromMenuOption = React.useCallback(
+    (option: { id: string; name: string }) => {
+      return option.id;
+    },
+    [],
+  );
+  const menuOptionsRenderer = React.useCallback(
+    (option: { id: string; name: string }) => {
+      return <div>[ {option.name} ]</div>;
+    },
+    [],
+  );
+  const handleSelectItem = React.useCallback(
+    (key: string, _option: any, newIsSelected: boolean) => {
+      if (newIsSelected) {
+        setSelectedOptions([key]);
+      }
+    },
+    [],
+  );
 
   return (
     <Box className="m-20 rounded-lg pt-3">
+      <div className="m-7">
+        <Button
+          ref={menuCheckboxButtonRef}
+          onClick={() => setIsMenuCheckboxShown(true)}>
+          Menu Checkbox
+        </Button>
+        <Menu
+          activatingElementRef={menuCheckboxButtonRef}
+          shown={isMenuCheckboxShown}
+          onClickOutside={() => setIsMenuCheckboxShown(false)}
+          onItemClick={handleSelectItem}
+          options={menuOptions}
+          keyGetter={getKeyFromMenuOption}
+          itemRenderer={menuOptionsRenderer}
+          selectedKeys={selectedOptions}
+        />
+      </div>
+      <div className="m-7">
+        <Button
+          ref={menuRadioButtonRef}
+          onClick={() => setIsMenuRadioShown(true)}>
+          Menu Radio
+        </Button>
+        <Menu
+          activatingElementRef={menuRadioButtonRef}
+          shown={isMenuRadioShown}
+          onClickOutside={() => setIsMenuRadioShown(false)}
+          onItemClick={handleSelectItem}
+          options={menuOptions}
+          keyGetter={getKeyFromMenuOption}
+          itemRenderer={menuOptionsRenderer}
+          selectedKeys={selectedOptions}
+          useRadios
+        />
+      </div>
       <div className="m-7">
         <DropDown></DropDown>
       </div>
@@ -39,7 +115,7 @@ export function CommonComponentsDemo() {
         />
       </div>
       <div className="m-7">
-        <CheckBox
+        <RadioButton
           checked={cbxChecked}
           onClick={(value) => setCbxChecked(value)}
           label="checkable check check"

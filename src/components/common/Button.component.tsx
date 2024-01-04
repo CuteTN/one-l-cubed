@@ -7,19 +7,20 @@ export type ButtonProps = {
   onClick?: (event: React.MouseEvent) => void;
 };
 
-export function Button({
-  className = "",
-  children,
-  disabled = false,
-  onClick,
-}: ButtonProps) {
-  return (
-    <button
-      className={`control min-h-[3rem] neumorphism-6 p-3 rounded-lg flex align-middle justify-center ${className}`}
-      disabled={disabled}
-      aria-disabled={disabled}
-      onClick={onClick}>
-      {children}
-    </button>
-  );
-}
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    { className = "", children, disabled = false, onClick }: ButtonProps,
+    ref,
+  ) => {
+    return (
+      <button
+        ref={ref}
+        className={`control min-h-[3rem] neumorphism-6 p-3 rounded-lg flex align-middle justify-center ${className}`}
+        disabled={disabled}
+        aria-disabled={disabled}
+        onClick={onClick}>
+        {children}
+      </button>
+    );
+  },
+);

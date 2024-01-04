@@ -1,5 +1,4 @@
 import React from "react";
-import { convertUppercaseToSnakeCase } from "../../common/utils/strings.utils";
 import { allIcons } from "./icons";
 import { combineClassNames } from "common/utils/className";
 
