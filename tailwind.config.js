@@ -15,7 +15,8 @@ module.exports = {
         cubeGray: "#d0c9c9",
       },
       transitionProperty: {
-        size: "width, height"
+        size: "width, height",
+        filter: "filter",
       }
     },
   },

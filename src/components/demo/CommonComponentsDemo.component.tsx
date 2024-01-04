@@ -51,6 +51,12 @@ export function CommonComponentsDemo() {
     },
     [],
   );
+  const checkOptionSelected = React.useCallback(
+    ({ id }: { id: string; name: string }) => {
+      return selectedOptions[0] === id;
+    },
+    [selectedOptions],
+  );
 
   return (
     <Box className="m-20 rounded-lg pt-3">
@@ -68,7 +74,7 @@ export function CommonComponentsDemo() {
           options={menuOptions}
           keyGetter={getKeyFromMenuOption}
           itemRenderer={menuOptionsRenderer}
-          selectedKeys={selectedOptions}
+          isSelectedGetter={checkOptionSelected}
         />
       </div>
       <div className="m-7">
@@ -85,7 +91,7 @@ export function CommonComponentsDemo() {
           options={menuOptions}
           keyGetter={getKeyFromMenuOption}
           itemRenderer={menuOptionsRenderer}
-          selectedKeys={selectedOptions}
+          isSelectedGetter={checkOptionSelected}
           useRadios
         />
       </div>

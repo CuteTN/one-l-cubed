@@ -5,8 +5,10 @@ $neumorphism-themes: (
     light-shadow: #ffffff,
     text: #000000,
     disabled-text: #9ca3af,
-    selection: #a347ff,
+    selection: #9214fc,
     selection-text: #ffffff,
+    scroll: darken(#ffdfe7, 1.5%),
+    hovered-scroll: darken(#ffdfe7, 3%),
   ),
   dark: (
     main: #42383d,
@@ -16,6 +18,8 @@ $neumorphism-themes: (
     disabled-text: #a38f95,
     selection: #e493ff,
     selection-text: #000000,
+    scroll: lighten(#42383d, 3%),
+    hovered-scroll: lighten(#42383d, 6%),
   ),
 );
 
@@ -80,6 +84,8 @@ $max-neumorphism-level: 10;
   $disabled-text-color: map-get($theme, disabled-text);
   $selection-color: map-get($theme, selection);
   $selection-text-color: map-get($theme, selection-text);
+  $scroll-color: map-get($theme, scroll);
+  $hovered-scroll-color: map-get($theme, hovered-scroll);
 
   body {
     background-color: $main-color;
@@ -110,22 +116,25 @@ $max-neumorphism-level: 10;
   }
 
   ::-webkit-scrollbar {
-    width: 1rem;
+    width: 0.75rem;
     border-radius: 2px;
+    &:disabled {
+      display: none;
+    }
   }
   ::-webkit-scrollbar-track {
     @include inset-neumorphism(5, $theme);
     border-radius: 0.5rem;
     background-clip: content-box;
   }
-  ::-webkit-scrollbar:disabled {
-    display: none;
-  }
   ::-webkit-scrollbar-thumb {
-    @include neumorphism(4, $theme);
     border-radius: 0.5rem;
-    background-color: lighten($main-color, 2%);
-    border: darken($main-color, 1%) solid 3px;
+    background-color: $scroll-color;
+    border: $main-color solid 3px;
+    &:hover {
+      background-color: $hovered-scroll-color;
+      border: $main-color;
+    }
   }
   ::-webkit-scrollbar-button {
     display: none;

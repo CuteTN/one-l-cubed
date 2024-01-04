@@ -1,4 +1,3 @@
-import { combineClassNames } from "common/utils/className";
 import { CommonCheckable } from "./CommonCheckable.component";
 
 export type RadioButtonProps = {

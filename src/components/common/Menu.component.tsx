@@ -15,8 +15,8 @@ export type MenuProps<TOption, TOptionKey extends string | number> = {
   activatingElementRef?: React.RefObject<HTMLButtonElement | null>;
   options?: TOption[];
   keyGetter: (option: TOption) => TOptionKey;
+  isSelectedGetter?: (option: TOption) => boolean;
   itemRenderer: (option: TOption) => React.ReactElement;
-  selectedKeys?: Iterable<TOptionKey>;
   useRadios?: boolean;
 };
 
@@ -28,27 +28,24 @@ export function Menu<TOption, TOptionKey extends string | number>({
   itemRenderer,
   keyGetter,
   onItemClick,
-  selectedKeys,
+  isSelectedGetter = () => false,
   useRadios = false,
 }: MenuProps<TOption, TOptionKey>) {
-  const ref = React.useRef<HTMLDivElement>(null);
-
-  const selectedKeysSet = React.useMemo(() => {
-    return new Set(selectedKeys);
-  }, [selectedKeys]);
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const listRef = React.useRef<HTMLDivElement>(null);
 
   //#region Prevent scrolling
   React.useEffect(() => {
     if (shown) {
-      const x = window.scrollX;
-      const y = window.scrollY;
-      const revert = window.onscroll;
-      window.onscroll = function () {
-        window.scrollTo(x, y);
-      };
+      let timeoutId = setTimeout(() => {
+        listRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }, 50);
 
       return () => {
-        window.onscroll = revert;
+        clearTimeout(timeoutId);
       };
     }
   }, [shown]);
@@ -59,7 +56,7 @@ export function Menu<TOption, TOptionKey extends string | number>({
     (event: MouseEvent) => {
       if (
         shown &&
-        !ref.current?.contains(event.target as any) &&
+        !wrapperRef.current?.contains(event.target as any) &&
         !activatingElementRef?.current?.contains(event.target as any)
       ) {
         onClickOutside?.();
@@ -71,7 +68,7 @@ export function Menu<TOption, TOptionKey extends string | number>({
   );
 
   React.useEffect(() => {
-    if (ref.current && shown) {
+    if (wrapperRef.current && shown) {
       document.addEventListener("mousedown", handleClickOutside);
 
       return () => {
@@ -86,13 +83,13 @@ export function Menu<TOption, TOptionKey extends string | number>({
       <>
         {options.map((option, index) => {
           const key = keyGetter(option);
-          const isSelected = selectedKeysSet.has(key);
+          const isSelected = isSelectedGetter(option);
 
           return (
             <div key={key}>
               {!!index && <Divider className="w-full" />}
               <li
-                className="flex px-4 py-2 justify-start align-middle cursor-pointer"
+                className="flex px-4 py-1 justify-start align-middle cursor-pointer transition-filter duration-300 hover:brightness-[108%]"
                 onClick={() => onItemClick?.(key, option, !isSelected)}>
                 {useRadios ? (
                   <RadioButton
@@ -112,15 +109,23 @@ export function Menu<TOption, TOptionKey extends string | number>({
         })}
       </>
     );
-  }, [options, keyGetter, selectedKeysSet, useRadios, itemRenderer, onItemClick]);
+  }, [
+    options,
+    keyGetter,
+    isSelectedGetter,
+    useRadios,
+    itemRenderer,
+    onItemClick,
+  ]);
 
   return (
     <div
       className="relative m-0"
-      ref={ref}>
+      ref={wrapperRef}>
       <div
+        ref={listRef}
         className={combineClassNames(
-          "absolute neumorphism-4 mt-3 ml-1 z-10 py-3 rounded-md",
+          "absolute neumorphism-5 mt-2 ml-1 z-10 py-3 rounded-md",
           "max-h-72 overflow-scroll",
           [shown, "fade-in", "fade-out"],
         )}>

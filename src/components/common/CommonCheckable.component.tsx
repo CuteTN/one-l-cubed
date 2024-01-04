@@ -54,6 +54,7 @@ export function CommonCheckable({
         "neumorphism-checkable-container",
         "inline-flex",
         "relative",
+        [!disabled, "transition-filter duration-300 hover:brightness-[108%]"],
         [!disabled, "cursor-pointer"],
         className,
       )}>
