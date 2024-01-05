@@ -1,11 +1,11 @@
 import React from "react";
 import { EThemes, useThemes } from "contexts/themes-provider/themes.provider";
-import { NavBar } from "components/common/AppBar.component";
+import { NavBar } from "components/materials/NavBar.component";
+import { Box } from "components/materials/Frame.component";
+import { Button } from "components/materials/Button.component";
+import { Icon } from "components/materials/Icon.component";
 import darkLogo from "assets/images/one-l-cubed-dark.png";
 import lightLogo from "assets/images/one-l-cubed-light.png";
-import { Box } from "components/common/Frame.component";
-import { Button } from "components/common/Button.component";
-import { Icon } from "components/common/Icon.component";
 
 const THEMES_DATA = {
   [EThemes.light]: {

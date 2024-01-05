@@ -1,5 +1,5 @@
-import { AppNavBar } from "./components/app/AppNavBar/AppNavBar.component";
-import { CommonComponentsDemo } from "./components/demo/CommonComponentsDemo.component";
+import { AppRouter } from "routers/router.component";
+import { AppNavBar } from "./components/common/AppNavBar/AppNavBar.component";
 import { ThemesProvider } from "./contexts/themes-provider/themes.provider";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <ThemesProvider>
         <AppNavBar />
-        <CommonComponentsDemo />
+        <AppRouter />
       </ThemesProvider>
     </div>
   );

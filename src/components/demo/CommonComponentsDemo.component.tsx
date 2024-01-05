@@ -1,13 +1,13 @@
 import React from "react";
-import { Button } from "../common/Button.component";
-import { CheckBox } from "../common/CheckBox.component";
-import { Icon } from "../common/Icon.component";
-import { TextBox } from "../common/TextBox.component";
-import { Tooltip } from "../common/Tooltip.component";
-import { Box } from "../common/Frame.component";
-import { DropDown } from "components/common/DropDown.component";
-import { Menu } from "components/common/Menu.component";
-import { RadioButton } from "components/common/RadioButton.component";
+import { Button } from "../materials/Button.component";
+import { CheckBox } from "../materials/CheckBox.component";
+import { Icon } from "../materials/Icon.component";
+import { TextBox } from "../materials/TextBox.component";
+import { Tooltip } from "../materials/Tooltip.component";
+import { Box } from "../materials/Frame.component";
+import { DropDown } from "components/materials/DropDown.component";
+import { Menu } from "components/materials/Menu.component";
+import { RadioButton } from "components/materials/RadioButton.component";
 
 export function CommonComponentsDemo() {
   const menuCheckboxButtonRef = React.useRef<HTMLButtonElement>(null);
@@ -18,9 +18,7 @@ export function CommonComponentsDemo() {
   const [selectedOptions, setSelectedOptions] = React.useState<string[]>([
     "id-1",
   ]);
-  const [menuOptions, setMenuOptions] = React.useState<
-    { id: string; name: string }[]
-  >([
+  const [menuOptions] = React.useState<{ id: string; name: string }[]>([
     { id: "id-1", name: "One" },
     { id: "id-2", name: "Two" },
     { id: "id-3", name: "Three" },
