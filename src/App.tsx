@@ -1,4 +1,4 @@
-import { AppRouter } from "routers/router.component";
+import { AppRouter } from "routers/AppRouter.component";
 import { AppNavBar } from "./components/common/AppNavBar/AppNavBar.component";
 import { ThemesProvider } from "./contexts/themes-provider/themes.provider";
 
